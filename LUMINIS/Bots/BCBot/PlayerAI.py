@@ -9,6 +9,9 @@ class PlayerAI:
         """
         Any instantiation code goes here
         """
+        self.count = 0
+        self.movespot=[0,0]
+        self.movelist = [[-1,0],[-1,0],[0,1],[-1,0],[-1,0],[0,-1],[0,-1],[1,0]]
         pass
 
     def do_move(self, world, friendly_units, enemy_units):
@@ -25,11 +28,14 @@ class PlayerAI:
         # Take over the world
 
         ourNests = world.get_friendly_nest_positions()
-        movespot = [0,0]
+
         for unit in friendly_units:
             for nest in ourNests:
                 if unit == friendly_units[0]:
-                    movespot = [unit.position[0] - 1, unit.position[1]]
+                    self.movespot = [unit.position[0] + self.movelist[self.count][0], unit.position[1] + self.movelist[self.count][1]]
+                    self.count += 1
+                    if self.count == 7:
+                        self.count = 0
                 elif (unit.position == nest):
-                    movespot = [nest[0], nest[1] - 1]
-                world.move(unit, movespot)
+                    self.movespot = [nest[0], nest[1] - 1]
+                world.move(unit, self.movespot)
