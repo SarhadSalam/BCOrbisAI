@@ -28,8 +28,8 @@ class PlayerAI:
 
         for unit in friendly_units:
             for nest in ourNests:
-                if (unit.position == nest.position):
-                        world.move(unit, nest.position +(1,0))
+                if (unit.position == nest.position:
+                        world.move(unit, nest.position +(1,0)
                             # path = world.get_shortest_path(unit.position,
                             #              world.get_closest_capturable_tile_from(unit.position, None).position,
                             #               None)
