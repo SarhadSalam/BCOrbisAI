@@ -25,13 +25,11 @@ class PlayerAI:
         # Take over the world
 
         ourNests = world.get_friendly_nest_positions()
-
+        movespot = [0,0]
         for unit in friendly_units:
             for nest in ourNests:
-                if (unit.position == nest):
+                if unit == friendly_units[0]:
+                    movespot = [unit.position[0] - 1, unit.position[1]]
+                elif (unit.position == nest):
                     movespot = [nest[0], nest[1] - 1]
-                    world.move(unit, movespot)
-                            # path = world.get_shortest_path(unit.position,
-                            #              world.get_closest_capturable_tile_from(unit.position, None).position,
-                            #               None)
-                            #  if path: world.move(unit, path[0])
+                world.move(unit, movespot)
