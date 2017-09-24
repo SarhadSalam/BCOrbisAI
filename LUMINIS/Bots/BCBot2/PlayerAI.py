@@ -33,4 +33,10 @@ class PlayerAI:
                 if unit.uuid == self.bugsList[i]:
                     path = world.get_shortest_path(unit.position, world.get_closest_enemy_from(unit.position, None).position, None)
             
+            if unit.health >= 3:
+                path = world.get_shortest_path(unit.position, world.get_closest_enemy_nest_from(unit.position, None), None)
+
+            if (unit.health == 2):
+                path = world.get_shortest_path(unit.position, unit.position, None)
+
             if path: world.move(unit, path[0])
