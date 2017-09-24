@@ -31,14 +31,17 @@ class PlayerAI:
         # Take over the world
 
         ourNests = world.get_friendly_nest_positions()
-        if (len(self.defend) != len(ourNests)):
+        if (len(ourNests) > len(self.defend)):
             self.defend += [0]
+        if (len(ourNests) < len(self.defend)):
+            self.defend.pop() 
         for i in range(len(ourNests)):
             nest = ourNests[i]
             for unit in friendly_units:
                 if unit == friendly_units[0]:
                     self.movespot = [unit.position[0] + self.movelist[self.count][0], unit.position[1] + self.movelist[self.count][1]]
                     self.count += 1
+                    print (self.movespot)
                     if self.count == len(self.movelist):
                         self.count = 0
                 elif (unit.position == nest):
@@ -47,4 +50,3 @@ class PlayerAI:
                     if self.defend[i] == len(self.defendlist):
                         self.defend[i] = 0
                 world.move(unit, self.movespot)
-        time.sleep(0.5)
